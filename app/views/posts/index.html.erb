@@ -1,0 +1,10 @@
+<% unless @posts.empty? %>
+  <% @posts.each do |post| %>
+    <div class='post-card'>
+      <h1 class='post-title'><%= post.title %></h1>
+      <p class='post-body'><%= post.body %></p>
+    </div>
+  <% end %>
+<% else %>
+  <h1>Hello World!</h1>
+<% end %>
