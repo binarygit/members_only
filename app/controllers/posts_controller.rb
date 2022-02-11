@@ -3,6 +3,10 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def new
     @post = Post.new
   end
@@ -10,7 +14,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to root_path
+      redirect_to @post
     else
       flash.now.alert = 'Could not create Post'
       render :new
@@ -24,11 +28,18 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      flash[:notice] = 'Post Successfully Updated'
-      redirect_to root_path
+      redirect_to @post
     else
       render :edit
     end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    flash[:notice] = 'Post Successfully Deleted'
+    redirect_to root_path
   end
 
   private
