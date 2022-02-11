@@ -1,12 +1,17 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %> </p>
+<% end %>
+
 <% unless @posts.empty? %>
   <% @posts.each do |post| %>
     <div class='post-card'>
       <h1 class='post-title'><%= post.title %></h1>
       <p class='post-body'><%= post.body %></p>
+      <%= link_to 'Edit Post', edit_post_path(post) %>
     </div>
   <% end %>
 <% else %>
-  <h1>Hello World!</h1>
+  <h1>Sorry No Posts!</h1>
 <% end %>
 
 <br><%= link_to 'New Post', new_post_path %>

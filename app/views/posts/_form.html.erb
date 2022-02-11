@@ -1,0 +1,25 @@
+<div class='error-box'>
+  <p><%= flash[:alert] %></p> 
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+</div>
+
+<%= form_with model: post do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body, class: 'body-area' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<br><%= link_to 'Home', root_path %>
