@@ -58,11 +58,4 @@ class PostsController < ApplicationController
       redirect_to post_path
     end
   end
-
-  def authenticate_user!
-    unless current_user
-      flash.alert = 'You need to SignIn first'
-      redirect_to root_path
-    end
-  end
 end
