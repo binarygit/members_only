@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: :index
+
   def index
     @posts = Post.all
   end
@@ -46,5 +48,12 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def authenticate_user!
+    unless current_user
+      flash.alert = 'You need to SignIn first'
+      redirect_to root_path
+    end
   end
 end
