@@ -1,6 +1,6 @@
 body {
   padding: 20px;
-  background: red;
+  background: #E0115F;
 }
 
 .post-card {
@@ -11,5 +11,25 @@ body {
 .body-area {
   width: 250px;
   height: 100px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-btn {
+  align-self: center;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+}
+
+.nav ul li, .home-btn {
+  border: 2px solid;
+  padding: 5px;
+  margin: 3px;
 }
 
