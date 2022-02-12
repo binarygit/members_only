@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: :index
+  before_action :check_identity, only: [:edit, :destroy]
 
   def index
     @posts = Post.all
@@ -14,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
       redirect_to @post
     else
@@ -48,6 +49,14 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def check_identity
+    post = Post.find(params[:id])
+    unless post.user.username == current_user.username
+      flash.alert = 'You can only edit/delete posts that you authored'
+      redirect_to post_path
+    end
   end
 
   def authenticate_user!

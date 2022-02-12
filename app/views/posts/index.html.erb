@@ -2,6 +2,11 @@
   <% @posts.each do |post| %>
     <div class='post-card'>
       <h1 class='post-title'><%= post.title %></h1>
+      <% if signed_in? %>
+        <p>Author: <%= post.user.username %></p>
+      <% else %>
+        <p>Author: Anonymous</p>
+      <% end %>
       <%= link_to 'Show Post', post %>
     </div>
   <% end %>
@@ -10,11 +15,3 @@
 <% end %>
 
 <br><%= link_to 'New Post', new_post_path %>
-
-<!--
-  <% if user_signed_in? %>
-    <p>post.user.username</p>
-  <% else %>
-    <p>Anonymous</p>
-  <% end %>
--->
